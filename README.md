@@ -1,4 +1,4 @@
-# arkivu
+# arkivis
 
 # Frontend
 - React
