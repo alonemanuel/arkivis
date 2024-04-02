@@ -17,6 +17,7 @@ const Music: FC = () => {
   });
 
   const handleSubmit = async (event: FormEvent) => {
+    console.log(`Handling submit`);
     event.preventDefault();
 
     // Call your backend API to store the song
