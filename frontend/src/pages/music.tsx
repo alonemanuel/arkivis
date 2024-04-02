@@ -1,4 +1,5 @@
-import { FC, FormEvent, useState } from "react";
+import { Song } from "@/interfaces/Song";
+import { FC, FormEvent, useEffect, useState } from "react";
 
 interface SongFormState {
   title: string;
@@ -15,6 +16,20 @@ const Music: FC = () => {
     title: "",
     artist: "",
   });
+
+  const [songs, setSongs] = useState<Song[]>([]);
+
+  const fetchSongs = async () => {
+    const response = await fetch("/api/songs");
+    const data: Song[] = await response.json();
+    setSongs(data);
+  };
+
+  useEffect(() => {
+    // Fetch the songs when the component mounts
+
+    fetchSongs();
+  }, []); // Empty dependancy array means this runs once on mount
 
   const handleSubmit = async (event: FormEvent) => {
     console.log(`Handling submit`);
@@ -36,6 +51,9 @@ const Music: FC = () => {
       // Reset form state or give user feedback
       setFormState({ title: "", artist: "" });
     }
+
+    // After adding a new song, fetch the list again to update the UI
+    fetchSongs();
   };
 
   return (
@@ -66,6 +84,13 @@ const Music: FC = () => {
 
         <button type="submit">Add Song</button>
       </form>
+      <ul>
+        {songs.map((song) => (
+          <li key={song._id.toString()}>
+            {song.title} by {song.artist}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
