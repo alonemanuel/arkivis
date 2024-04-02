@@ -19,4 +19,11 @@
 # Containerization
 - Docker
 - Kubernetes
-   !
+
+# CI/CD
+- 
+
+# Monitoring and Security
+- CloudWatch
+- AWS IAM
+- AWS WAF
