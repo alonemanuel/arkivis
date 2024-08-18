@@ -6,6 +6,7 @@ import json
 
 @csrf_exempt
 def create_note(request):
+    print('to')
     if request.method == 'POST':
         data = json.loads(request.body)
         note_id = Note.create(data.get('content', ''))
@@ -16,6 +17,7 @@ def get_notes(request):
     if request.method == 'GET':
         notes = Note.get_all()
         return JsonResponse(notes, safe=False)
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def update_note(request, note_id):
