@@ -25,6 +25,10 @@ import ToastProvider from './components/ui/ToastProvider';
 // Google OAuth client ID
 const GOOGLE_CLIENT_ID = "506700005225-jb8a56jktk9c1bsf9sfgrvemlm9tsd9v.apps.googleusercontent.com"; 
 
+// Constants for localStorage
+const STORAGE_KEY_USER = 'arkivis_user';
+const STORAGE_KEY_DARK_MODE = 'arkivis_dark_mode';
+
 type TabOption = 'notes' | 'friends' | 'profile';
 
 function App() {
@@ -33,6 +37,27 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [activeTab, setActiveTab] = useState<TabOption>('notes');
 
+  // Effect to restore user session and preferences from localStorage on mount
+  useEffect(() => {
+    // Restore user session
+    const savedUserData = localStorage.getItem(STORAGE_KEY_USER);
+    if (savedUserData) {
+      try {
+        const parsedUserData = JSON.parse(savedUserData);
+        setUser(parsedUserData);
+      } catch (error) {
+        console.error('Failed to parse user data from localStorage:', error);
+        localStorage.removeItem(STORAGE_KEY_USER);
+      }
+    }
+
+    // Restore dark mode preference
+    const savedDarkMode = localStorage.getItem(STORAGE_KEY_DARK_MODE);
+    if (savedDarkMode) {
+      setDarkMode(savedDarkMode === 'true');
+    }
+  }, []);
+
   useEffect(() => {
     // Apply dark mode to the HTML element
     if (darkMode) {
@@ -40,10 +65,22 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    
+    // Save dark mode preference
+    localStorage.setItem(STORAGE_KEY_DARK_MODE, darkMode.toString());
   }, [darkMode]);
 
   const handleLogin = (userInfo: UserInfo) => {
     setUser(userInfo);
+    // Save user data to localStorage for session persistence
+    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(userInfo));
+  };
+
+  const handleLogout = () => {
+    // Clear user data from state and localStorage
+    setUser(null);
+    localStorage.removeItem(STORAGE_KEY_USER);
+    setActiveTab('notes');
   };
 
   const toggleDarkMode = () => {
@@ -79,7 +116,8 @@ function App() {
               darkMode={darkMode} 
               toggleDarkMode={toggleDarkMode} 
               activeTab={activeTab} 
-              onTabChange={setActiveTab} 
+              onTabChange={setActiveTab}
+              onLogout={handleLogout}
             />
           )}
 
