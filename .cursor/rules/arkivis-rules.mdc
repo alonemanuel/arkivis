@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- Always refer to [README.md](mdc:README.md) to remember the project structure
+- Always prefer clean code without duplication
