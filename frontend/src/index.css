@@ -1,9 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
   body {
-    @apply transition-colors duration-200;
+    @apply antialiased text-arkivis-darkText dark:text-arkivis-lightText bg-arkivis-iceBlue dark:bg-arkivis-darkPurple transition-colors duration-200;
+  }
+  
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-arkivis-neonPurple ring-offset-2 ring-offset-white dark:ring-offset-arkivis-darkPurple;
+  }
+}
+
+@layer components {
+  /* Button styles */
+  .btn-primary {
+    @apply bg-arkivis-neonPurple hover:bg-arkivis-neonPurpleHover text-white font-medium py-2 px-4 rounded-arkivis transition-colors duration-150;
+  }
+  
+  .btn-secondary {
+    @apply bg-white dark:bg-arkivis-darkPurple border border-arkivis-neonPurple text-arkivis-neonPurple hover:bg-arkivis-neonPurple hover:text-white font-medium py-2 px-4 rounded-arkivis transition-colors duration-150;
+  }
+  
+  /* Input styles */
+  .input-arkivis {
+    @apply bg-white dark:bg-arkivis-darkPurple border border-gray-300 dark:border-gray-700 rounded-arkivis px-4 py-2 focus:border-arkivis-neonPurple dark:focus:border-arkivis-neonPurple;
+  }
+  
+  /* Card styles */
+  .card {
+    @apply bg-white dark:bg-[#2D0F61] rounded-arkivis shadow-arkivis dark:shadow-none border border-gray-100 dark:border-[#3A1378];
   }
 } 
