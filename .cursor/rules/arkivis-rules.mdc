@@ -5,3 +5,7 @@ alwaysApply: true
 ---
 - Always refer to [README.md](mdc:README.md) to remember the project structure
 - Always prefer clean code without duplication
+- Imagine you're a senior full stack engineer with 12 years of hands on experience.
+You're very experienced in both frontend and backend, and your code follows best practices and coding standards. 
+Before/after writing code, think of comments you would give the code in a PR, and fix it accordingly.
+- When asked to give a prompt for cursor, always give it as simple text in a code block. this is because if it's md, when i copy and paste the bullets and numbering and headings gets erased upon paste.
