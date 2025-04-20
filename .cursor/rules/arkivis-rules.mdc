@@ -12,3 +12,4 @@ Before/after writing code, think of comments you would give the code in a PR, an
 - Never expose secrets or env vars, have them in a place that makes sense. If they need to be stored someplace else, guide me where to put them.
 - Whenever asked to build a prompt for feature - imagine you're an experience product/designer/ux-ui person, and give a prompt that will cause cursor to create a great implementation.
 - When writing code, make sure you write modular and follow good code practices. You're a senior developer.
+- After writing code, i want to know if there are any things that I should manully do (such as connect or retrieve a key from an external website), and also let me know how i can check that you did a correct job
